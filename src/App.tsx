@@ -1,30 +1,20 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import './App.css'
+import TodoList from './TodoList';
 
-interface TList {
-  id : number;
-  text : string;
-  completed : boolean;
-}
+
 
 function App() {
 
-  const [todoList, setTodoList] = useState<TList[]>([
-    { id: 1,
-      text: "할일1",
-      completed: false
-    },
-    { id: 2,
-      text: "할일2",
-      completed: false
-    }
-  ]);
+  
 
 
   return (
     <>
       <div className="App">
-        <div className="todoListContainer">
+        {/* <div className="todoListContainer"> */}
+
+
           {/* <li className="todoContainer">
             <button>완료</button>
             <p>할 일 1</p>
@@ -42,7 +32,10 @@ function App() {
             </div>
           </li> */}
 
-          {todoList.map((item, idx) => (
+
+          
+
+          {/* {todoList.map((item, idx) => (
             <div key={idx}>
               <li className="todoContainer">
                 <button>완료</button>
@@ -55,17 +48,19 @@ function App() {
             </div>
           ))}
 
-
-
-
-
         </div>
         <div className="todoCreateContainer">
           <form>
             <input type="text" placeholder="할 일을 입력해 주세요." />
             <button>등록</button>
           </form>
-        </div>
+        </div> */}
+
+        <TodoList />
+
+
+
+
       </div>
     </>
   )
