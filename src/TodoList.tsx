@@ -50,8 +50,15 @@ export default function TodoList() {
         // 아래처럼도 사용 가능
         // setTodoList(todoList.concat(newTodo));
         // 입력한 값 지우기
-        setInputText("");
+        setInputText("");      
     };
+
+    const textDeleteHandler = (id: number) => {
+        setTodoList(todoList.filter((todoItem) => todoItem.id !== id));
+        //filter 로 id!==id 하는것들만 모아 TodoList 재생성(업데이트)
+    };
+
+    
 
 
 
@@ -59,12 +66,18 @@ export default function TodoList() {
     return (
         <div className="todoListContainer">
           {todoList.map((item) => (
-            <TodoItem key={item.id} text={item.text} completed={item.completed} />
+            <TodoItem 
+            id={item.id} 
+            text={item.text} 
+            completed={item.completed} 
+            onClickDelete={textDeleteHandler}
+            />
           ))}
           <CreateTodo
             onChange={textTypingHandler}
             onSubmit={textInputHandler}
             inputText={inputText}
+            
           />
         
         </div>
