@@ -2,7 +2,7 @@ import { useState } from "react";
 import TodoItem from "./TodoItem";
 import CreateTodo from "./CreateTodo";
 
-interface TList {
+export interface TList {
     id : number;
     text : string;
     completed : boolean;
@@ -58,27 +58,41 @@ export default function TodoList() {
         //filter 로 id!==id 하는것들만 모아 TodoList 재생성(업데이트)
     };
 
-    
+    const textUpdateHandler = (newTodo: TList): void => {
+        const newTodoList = todoList.map((item) => {
+          // id값이 같은 것은 새롭게 입력한 값으로 return하고
+            if (item.id === newTodo.id) {    
+                // ===는 타입까지 비교하는 연산자
+                return newTodo;
+                // 그 외에는 기존 값을 return
+            } else {
+                return item;
+            }
+        });
+        setTodoList(newTodoList);
+    };
 
 
 
 
     return (
         <div className="todoListContainer">
-          {todoList.map((item) => (
-            <TodoItem 
-            id={item.id} 
-            text={item.text} 
-            completed={item.completed} 
-            onClickDelete={textDeleteHandler}
+            <h3> TodoList </h3>
+            {todoList.map((item) => (
+                <TodoItem 
+                id={item.id} 
+                text={item.text} 
+                completed={item.completed} 
+                onClickDelete={textDeleteHandler}
+                onClickUpdate={textUpdateHandler}
+                />
+            ))}
+            <CreateTodo
+                onChange={textTypingHandler}
+                onSubmit={textInputHandler}
+                inputText={inputText}
+                
             />
-          ))}
-          <CreateTodo
-            onChange={textTypingHandler}
-            onSubmit={textInputHandler}
-            inputText={inputText}
-            
-          />
         
         </div>
     );
